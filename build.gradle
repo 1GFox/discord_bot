@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.1'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'ru.chernyshev'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven{
+        url "https://maven.lavalink.dev/releases"
+    }
+    maven {
+        url "https://jitpack.io/"
+    }
+}
+
+dependencies {
+    implementation "net.dv8tion:JDA:5.0.0-beta.24"
+    implementation "dev.arbjerg:lavaplayer:2.2.0"
+    implementation "dev.lavalink.youtube:v2:1.3.0"
+    implementation "commons-io:commons-io:2.16.1"
+    implementation 'org.springframework.boot:spring-boot-starter'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
